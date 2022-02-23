@@ -1,6 +1,6 @@
 import React from 'react';
 import {useFormik} from "formik";
-import FormValidationSchema from "../../helpers/FormValidationSchema";
+import FormValidationSchema from "../../helpers/validators/FormValidationSchema";
 
 import s from './Form.module.css'
 
@@ -11,8 +11,8 @@ const Form = () => {
             lastName: '',
             email: '',
             phone_no: '',
-            uploadImg: null,
-            uploadPdf: null
+            imgFile: '',
+            pdfFile: ''
         },
         validationSchema: FormValidationSchema,
         onSubmit: values => {
@@ -61,13 +61,32 @@ const Form = () => {
             />
             <label htmlFor="phone_no">Phone Number</label>
             <input
-                type="phone_no"
+                type="tel"
                 id="phone_no"
                 name="phone_no"
+                placeholder="(123) 123-1234"
                 className={formFieldClasses('phone_no')}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone_no}
+            />
+            <label htmlFor="imgFile">Phone Number</label>
+            <input
+                type="file"
+                id="imgFile"
+                name="imgFile"
+                className={formFieldClasses('imgFile')}
+                onChange={event => formik.setFieldValue('imgFile', event.currentTarget.files)}
+                onBlur={formik.handleBlur}
+            />
+            <label htmlFor="pdfFile">Phone Number</label>
+            <input
+                type="file"
+                id="pdfFile"
+                name="pdfFile"
+                className={formFieldClasses('pdfFile')}
+                onChange={event => formik.setFieldValue('pdfFile', event.currentTarget.files)}
+                onBlur={formik.handleBlur}
             />
             <button>Submit</button>
         </form>
