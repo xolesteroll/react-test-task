@@ -1,0 +1,17 @@
+.navList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: inherit;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.navLink.active {
+    color: red;
+}
