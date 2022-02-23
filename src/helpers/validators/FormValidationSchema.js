@@ -1,26 +1,7 @@
 import * as Yup from 'yup';
+import filesValidator from './filesValidator'
 
-Yup.addMethod(Yup.mixed, 'isPdf', (message) => {
-    // return this.test('ifPdf', message, (files) => {
-    //     const {path, createError} = this
-    //
-    //     files.forEach(f => {
-    //         if (f.type !== 'application/pdf') {
-    //             return createError({
-    //                 message,
-    //                 path
-    //             })
-    //         }
-    //     })
-    //
-    //     return true
-    // })
-    return this.test({
-        name: 'isFilePdf',
-        message,
-        test: files => files.filter(f => f.type !== 'application/pdf').length === 0
-    })
-})
+Yup.addMethod(Yup.mixed, 'isCorrectFormat', filesValidator)
 
 const FormValidationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -38,7 +19,10 @@ const FormValidationSchema = Yup.object().shape({
         .matches(/^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/, 'Incorrect format, example: (123) 123-1234' )
         .required('Please enter your phone'),
     pdfFiles: Yup.mixed()
-        // .isPdf().required('This filed is required')
+        .isCorrectFormat('pdf', 'The file: ', ' has incorrect type, Only .pdf allowed').required('This filed is required'),
+    imgFiles: Yup.mixed()
+        .isCorrectFormat('img', 'The file: ', ' has incorrect type, Only .jpg allowed').required('This filed is required'),
+
 })
 
 

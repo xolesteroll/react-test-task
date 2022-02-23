@@ -25,15 +25,6 @@ const Form = () => {
         `${s.formField} ${s.invalid}` :
         s.formField
 
-    const files = formik.values.imgFiles
-
-    for (let i = 0; i < files.length; i++) {
-        console.log(files[i].type)
-    }
-
-    console.log()
-
-
     return (
         <form className={s.form} onSubmit={formik.handleSubmit}>
             <label htmlFor="firstName">First Name</label>
@@ -84,7 +75,7 @@ const Form = () => {
                 name="imgFiles"
                 multiple
                 className={formFieldClasses('imgFiles')}
-                onChange={event => formik.setFieldValue('imgFiles', event.currentTarget.files)}
+                onChange={event => formik.setFieldValue('imgFiles', [...event.currentTarget.files])}
                 onBlur={formik.handleBlur}
             />
             <label htmlFor="pdfFiles">Pdf files</label>
@@ -94,7 +85,7 @@ const Form = () => {
                 name="pdfFiles"
                 multiple
                 className={formFieldClasses('pdfFiles')}
-                onChange={event => formik.setFieldValue('pdfFiles', event.currentTarget.files)}
+                onChange={event => formik.setFieldValue('pdfFiles', [...event.currentTarget.files])}
                 onBlur={formik.handleBlur}
             />
             <button>Submit</button>
