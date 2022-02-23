@@ -1,0 +1,8 @@
+.layoutDialog {
+    max-width: 800px;
+    width: 100%;
+    margin: 50px auto;
+    padding: 25px 150px;
+    background: #cccccc;
+    border-radius: 15px;
+}

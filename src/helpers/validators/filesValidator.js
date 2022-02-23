@@ -1,5 +1,5 @@
 function filesValidator(type) {
-    return this.test('ifPdf', {type}, function (files) {
+    return this.test('ifPdf', type, function (files) {
 
         let result = true
         let fileNames = []

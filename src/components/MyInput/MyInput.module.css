@@ -1,0 +1,32 @@
+.myInputWrapper {
+    width: 100%;
+}
+
+.formField {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+}
+
+.formField.invalid {
+    border: 1px solid red;
+}
+
+.myInputControls {
+    padding: 30px 0 10px;
+    position: relative;
+}
+
+.formErrorNotice {
+    font-size: 15px;
+    line-height: 17px;
+    max-width: 100%;
+    width: fit-content;
+    padding: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 32px);
+    background-color: #e3c27f;
+}

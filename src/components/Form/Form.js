@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useFormik} from "formik";
 import FormValidationSchema from "../../helpers/validators/FormValidationSchema";
 
 import s from './Form.module.css'
+import MyInput from "../MyInput/MyInput";
 
 const Form = () => {
     const formik = useFormik({
@@ -28,84 +29,78 @@ const Form = () => {
 
     return (
         <form className={s.form} onSubmit={formik.handleSubmit}>
-            <label htmlFor="firstName">First Name</label>
-            {(formik.errors.firstName && formik.touched.firstName) &&
-            <p className={s.formErrorNotice}>{formik.errors.firstName}</p>
-            }
-            <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                className={formFieldClasses('firstName')}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+            <MyInput
                 value={formik.values.firstName}
-            />
-            <label htmlFor="lastName">Last Name</label>
-            {(formik.errors.lastName && formik.touched.lastName) &&
-            <p className={s.formErrorNotice}>{formik.errors.lastName}</p>
-            }
-            <input
                 type="text"
-                id="lastName"
-                name="lastName"
-                className={formFieldClasses('lastName')}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                name="firstName"
+                label="First Name"
+                error={(formik.errors.firstName && formik.touched.firstName) ?
+                    formik.errors.firstName :
+                    null
+                }
+                onChangeHandler={formik.handleChange}
+                onBlurHandler={formik.handleBlur}
+            />
+            <MyInput
                 value={formik.values.lastName}
+                type="text"
+                name="lastName"
+                label="Last Name"
+                error={(formik.errors.lastName && formik.touched.lastName) ?
+                    formik.errors.lastName :
+                    null
+                }
+                onChangeHandler={formik.handleChange}
+                onBlurHandler={formik.handleBlur}
             />
-            <label htmlFor="email">Email</label>
-            {(formik.errors.email && formik.touched.email) &&
-            <p className={s.formErrorNotice}>{formik.errors.email}</p>
-            }
-            <input
-                type="email"
-                id="email"
-                name="email"
-                className={formFieldClasses('email')}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+            <MyInput
                 value={formik.values.email}
+                type="email"
+                name="email"
+                label="Email"
+                error={(formik.errors.email && formik.touched.email) ?
+                    formik.errors.email :
+                    null
+                }
+                onChangeHandler={formik.handleChange}
+                onBlurHandler={formik.handleBlur}
             />
-            <label htmlFor="phone_no">Phone Number</label>
-            {(formik.errors.phone_no && formik.touched.phone_no) &&
-            <p className={s.formErrorNotice}>{formik.errors.phone_no}</p>
-            }
-            <input
-                type="tel"
-                id="phone_no"
-                name="phone_no"
-                placeholder="(123) 123-1234"
-                className={formFieldClasses('phone_no')}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+            <MyInput
                 value={formik.values.phone_no}
+                type="tel"
+                name="phone_no"
+                label="Phone number"
+                error={(formik.errors.phone_no && formik.touched.phone_no) ?
+                    formik.errors.phone_no :
+                    null
+                }
+                onChangeHandler={formik.handleChange}
+                onBlurHandler={formik.handleBlur}
+                placeholder="(123) 123-1234"
             />
-            <label htmlFor="imgFiles">Images</label>
-            {(formik.errors.imgFiles && formik.touched.imgFiles) &&
-            <p className={s.formErrorNotice}>{formik.errors.imgFiles}</p>
-            }
-            <input
+            <MyInput
                 type="file"
-                id="imgFiles"
                 name="imgFiles"
-                multiple
-                className={formFieldClasses('imgFiles')}
-                onChange={event => formik.setFieldValue('imgFiles', [...event.currentTarget.files])}
-                onBlur={formik.handleBlur}
+                label="Images"
+                error={(formik.errors.imgFiles && formik.touched.imgFiles) ?
+                    formik.errors.imgFiles :
+                    null
+                }
+                onChangeHandler={event => formik.setFieldValue('imgFiles', [...event.currentTarget.files])}
+                onBlurHandler={formik.handleBlur}
+                placeholder="(123) 123-1234"
             />
-            <label htmlFor="pdfFiles">Pdf files</label>
-            {(formik.errors.pdfFiles && formik.touched.pdfFiles) &&
-            <p className={s.formErrorNotice}>{formik.errors.pdfFiles}</p>
-            }
-            <input
+            <MyInput
                 type="file"
-                id="pdfFiles"
                 name="pdfFiles"
-                multiple
-                className={formFieldClasses('pdfFiles')}
-                onChange={event => formik.setFieldValue('pdfFiles', [...event.currentTarget.files])}
-                onBlur={formik.handleBlur}
+                label="Pdf Files"
+                error={(formik.errors.pdfFiles && formik.touched.pdfFiles) ?
+                    formik.errors.pdfFiles :
+                    null
+                }
+                onChangeHandler={event => formik.setFieldValue('pdfFiles', [...event.currentTarget.files])}
+                onBlurHandler={formik.handleBlur}
+                placeholder="(123) 123-1234"
             />
             <button>Submit</button>
         </form>
