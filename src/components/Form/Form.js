@@ -25,9 +25,13 @@ const Form = () => {
         `${s.formField} ${s.invalid}` :
         s.formField
 
+
     return (
         <form className={s.form} onSubmit={formik.handleSubmit}>
             <label htmlFor="firstName">First Name</label>
+            {(formik.errors.firstName && formik.touched.firstName) &&
+            <p className={s.formErrorNotice}>{formik.errors.firstName}</p>
+            }
             <input
                 type="text"
                 id="firstName"
@@ -38,6 +42,9 @@ const Form = () => {
                 value={formik.values.firstName}
             />
             <label htmlFor="lastName">Last Name</label>
+            {(formik.errors.lastName && formik.touched.lastName) &&
+            <p className={s.formErrorNotice}>{formik.errors.lastName}</p>
+            }
             <input
                 type="text"
                 id="lastName"
@@ -48,6 +55,9 @@ const Form = () => {
                 value={formik.values.lastName}
             />
             <label htmlFor="email">Email</label>
+            {(formik.errors.email && formik.touched.email) &&
+            <p className={s.formErrorNotice}>{formik.errors.email}</p>
+            }
             <input
                 type="email"
                 id="email"
@@ -58,6 +68,9 @@ const Form = () => {
                 value={formik.values.email}
             />
             <label htmlFor="phone_no">Phone Number</label>
+            {(formik.errors.phone_no && formik.touched.phone_no) &&
+            <p className={s.formErrorNotice}>{formik.errors.phone_no}</p>
+            }
             <input
                 type="tel"
                 id="phone_no"
@@ -69,6 +82,9 @@ const Form = () => {
                 value={formik.values.phone_no}
             />
             <label htmlFor="imgFiles">Images</label>
+            {(formik.errors.imgFiles && formik.touched.imgFiles) &&
+            <p className={s.formErrorNotice}>{formik.errors.imgFiles}</p>
+            }
             <input
                 type="file"
                 id="imgFiles"
@@ -79,6 +95,9 @@ const Form = () => {
                 onBlur={formik.handleBlur}
             />
             <label htmlFor="pdfFiles">Pdf files</label>
+            {(formik.errors.pdfFiles && formik.touched.pdfFiles) &&
+            <p className={s.formErrorNotice}>{formik.errors.pdfFiles}</p>
+            }
             <input
                 type="file"
                 id="pdfFiles"

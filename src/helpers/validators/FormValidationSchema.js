@@ -19,9 +19,9 @@ const FormValidationSchema = Yup.object().shape({
         .matches(/^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/, 'Incorrect format, example: (123) 123-1234' )
         .required('Please enter your phone'),
     pdfFiles: Yup.mixed()
-        .isCorrectFormat('pdf', 'The file: ', ' has incorrect type, Only .pdf allowed').required('This filed is required'),
+        .isCorrectFormat('pdf').required('This filed is required'),
     imgFiles: Yup.mixed()
-        .isCorrectFormat('img', 'The file: ', ' has incorrect type, Only .jpg allowed').required('This filed is required'),
+        .isCorrectFormat('img').required('This filed is required'),
 
 })
 

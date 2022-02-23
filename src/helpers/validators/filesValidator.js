@@ -1,26 +1,32 @@
-function filesValidator(type, messageOne, messageTwo) {
-    return this.test('ifPdf', {type, messageOne, messageTwo}, function (files) {
+function filesValidator(type) {
+    return this.test('ifPdf', {type}, function (files) {
 
         let result = true
-        let fileName = ''
+        let fileNames = []
 
         for (let i = 0; i < files.length; i++) {
             if (type === 'pdf' && files[i].type !== 'application/pdf') {
-                result = false
-                fileName = files[i].name
-                break
+                if(result) {
+                    result = false
+                }
+                fileNames.push(files[i].name)
             }
             if (type === 'img' && files[i].type !== 'image/jpeg') {
+                if(result) {
+                    result = false
+                }
                 result = false
-                fileName = files[i].name
-                break
+                fileNames.push(files[i].name)
             }
         }
 
         if (!result) {
             return this.createError({
                 path: this.path,
-                message: `${messageOne}${fileName}${messageTwo}`
+                message: `
+                    ${fileNames.length > 1 ? 'Files:' : 'File:'} ${fileNames.join(', ')} ${fileNames.length > 1 ? 'have' : 'has'} incorrect format,
+                    Only ${type === 'img' ? 'img' : type === 'pdf' ? '.pdf' : ''} is allowed
+                `
             })
         }
 
