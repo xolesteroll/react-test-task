@@ -11,8 +11,8 @@ const Form = () => {
             lastName: '',
             email: '',
             phone_no: '',
-            imgFile: '',
-            pdfFile: ''
+            imgFiles: [],
+            pdfFiles: []
         },
         validationSchema: FormValidationSchema,
         onSubmit: values => {
@@ -25,7 +25,14 @@ const Form = () => {
         `${s.formField} ${s.invalid}` :
         s.formField
 
-    console.log(formik)
+    const files = formik.values.imgFiles
+
+    for (let i = 0; i < files.length; i++) {
+        console.log(files[i].type)
+    }
+
+    console.log()
+
 
     return (
         <form className={s.form} onSubmit={formik.handleSubmit}>
@@ -70,22 +77,24 @@ const Form = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.phone_no}
             />
-            <label htmlFor="imgFile">Phone Number</label>
+            <label htmlFor="imgFiles">Images</label>
             <input
                 type="file"
-                id="imgFile"
-                name="imgFile"
-                className={formFieldClasses('imgFile')}
-                onChange={event => formik.setFieldValue('imgFile', event.currentTarget.files)}
+                id="imgFiles"
+                name="imgFiles"
+                multiple
+                className={formFieldClasses('imgFiles')}
+                onChange={event => formik.setFieldValue('imgFiles', event.currentTarget.files)}
                 onBlur={formik.handleBlur}
             />
-            <label htmlFor="pdfFile">Phone Number</label>
+            <label htmlFor="pdfFiles">Pdf files</label>
             <input
                 type="file"
-                id="pdfFile"
-                name="pdfFile"
-                className={formFieldClasses('pdfFile')}
-                onChange={event => formik.setFieldValue('pdfFile', event.currentTarget.files)}
+                id="pdfFiles"
+                name="pdfFiles"
+                multiple
+                className={formFieldClasses('pdfFiles')}
+                onChange={event => formik.setFieldValue('pdfFiles', event.currentTarget.files)}
                 onBlur={formik.handleBlur}
             />
             <button>Submit</button>
