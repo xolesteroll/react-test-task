@@ -28,7 +28,7 @@ const Form = () => {
     console.log(formik)
 
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form className={s.form} onSubmit={formik.handleSubmit}>
             <label htmlFor="firstName">First Name</label>
             <input
                 type="text"
