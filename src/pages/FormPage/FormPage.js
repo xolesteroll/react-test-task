@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Form from "../../components/Form/Form";
+import Loader from "../../UI/Loader/Loader";
 
 const FormPage = () => {
+    const [isFetching, setIsFetching] = useState(false)
 
     return (
-        <Form />
+        <>
+            {isFetching && <Loader/>}
+            <Form changeFetchingState={setIsFetching}/>
+        </>
     );
 
 };
