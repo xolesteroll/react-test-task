@@ -5,7 +5,8 @@ import FormValidationSchema from "../../helpers/validators/FormValidationSchema"
 import s from './Form.module.css'
 import MyInput from "../MyInput/MyInput";
 
-const Form = () => {
+const Form = ({fetchingState, changeFetchingState}) => {
+
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -16,8 +17,26 @@ const Form = () => {
             pdfFiles: []
         },
         validationSchema: FormValidationSchema,
-        onSubmit: values => {
-            console.log(JSON.stringify(values))
+        onSubmit: async values => {
+            changeFetchingState(true)
+            try {
+                const formData = new FormData
+                formData.append('firstName', values.firstName)
+                formData.append('lastName', values.lastName)
+                formData.append('email', values.email)
+                formData.append('phone_no', values.phone_no)
+                formData.append('imgFiles', values.imgFiles)
+                formData.append('pdfFiles', values.pdfFiles)
+
+                const response = await fetch('http://test.com', {
+                    method: 'POST',
+                    body: formData
+                })
+                console.log(response)
+            } catch (e) {
+                console.log(e.message)
+            }
+            changeFetchingState(false)
         },
         validateOnBlur: true
     })
@@ -78,31 +97,31 @@ const Form = () => {
                 onBlurHandler={formik.handleBlur}
                 placeholder="(123) 123-1234"
             />
-            <MyInput
+            <label htmlFor="imgFiles">Images</label>
+            {(formik.errors.imgFiles && formik.touched.imgFiles) &&
+            <p className={s.formErrorNotice}>{formik.errors.imgFiles}</p>
+            }
+            <input
                 type="file"
                 name="imgFiles"
-                label="Images"
-                error={(formik.errors.imgFiles && formik.touched.imgFiles) ?
-                    formik.errors.imgFiles :
-                    null
-                }
-                onChangeHandler={event => formik.setFieldValue('imgFiles', [...event.currentTarget.files])}
-                onBlurHandler={formik.handleBlur}
-                placeholder="(123) 123-1234"
+                className={formFieldClasses('imgFiles')}
+                onChange={event => formik.setFieldValue('imgFiles', [...event.currentTarget.files])}
+                onBlur={formik.handleBlur}
+                multiple
             />
-            <MyInput
+            <label htmlFor="pdfFiles">PDFs</label>
+            {(formik.errors.pdfFiles && formik.touched.pdfFiles) &&
+            <p className={s.formErrorNotice}>{formik.errors.pdfFiles}</p>
+            }
+            <input
                 type="file"
                 name="pdfFiles"
-                label="Pdf Files"
-                error={(formik.errors.pdfFiles && formik.touched.pdfFiles) ?
-                    formik.errors.pdfFiles :
-                    null
-                }
-                onChangeHandler={event => formik.setFieldValue('pdfFiles', [...event.currentTarget.files])}
-                onBlurHandler={formik.handleBlur}
-                placeholder="(123) 123-1234"
+                className={formFieldClasses('pdfFiles')}
+                onChange={event => formik.setFieldValue('pdfFiles', [...event.currentTarget.files])}
+                onBlur={formik.handleBlur}
+                multiple
             />
-            <button>Submit</button>
+            <button type="submit">Submit</button>
         </form>
     );
 };

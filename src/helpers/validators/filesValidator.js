@@ -25,7 +25,7 @@ function filesValidator(type) {
                 path: this.path,
                 message: `
                     ${fileNames.length > 1 ? 'Files:' : 'File:'} ${fileNames.join(', ')} ${fileNames.length > 1 ? 'have' : 'has'} incorrect format,
-                    Only ${type === 'img' ? 'img' : type === 'pdf' ? '.pdf' : ''} is allowed
+                    Only ${type === 'img' ? '.jpg' : type === 'pdf' ? '.pdf' : ''} format is allowed
                 `
             })
         }
