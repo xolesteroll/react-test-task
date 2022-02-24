@@ -41,6 +41,7 @@ const Form = ({changeFetchingState}) => {
         validateOnBlur: true
     })
 
+
     const formFieldClasses = (fieldName) => formik.errors[fieldName] && formik.touched[fieldName] ?
         `${s.formField} ${s.invalid}` :
         s.formField
