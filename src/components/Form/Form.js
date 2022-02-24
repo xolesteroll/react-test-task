@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useFormik} from "formik";
 import FormValidationSchema from "../../helpers/validators/FormValidationSchema";
 
 import s from './Form.module.css'
 import MyInput from "../MyInput/MyInput";
 
-const Form = ({fetchingState, changeFetchingState}) => {
+const Form = ({changeFetchingState}) => {
 
     const formik = useFormik({
         initialValues: {
@@ -20,7 +20,7 @@ const Form = ({fetchingState, changeFetchingState}) => {
         onSubmit: async values => {
             changeFetchingState(true)
             try {
-                const formData = new FormData
+                const formData = new FormData()
                 formData.append('firstName', values.firstName)
                 formData.append('lastName', values.lastName)
                 formData.append('email', values.email)
@@ -44,7 +44,6 @@ const Form = ({fetchingState, changeFetchingState}) => {
     const formFieldClasses = (fieldName) => formik.errors[fieldName] && formik.touched[fieldName] ?
         `${s.formField} ${s.invalid}` :
         s.formField
-
 
     return (
         <form className={s.form} onSubmit={formik.handleSubmit}>

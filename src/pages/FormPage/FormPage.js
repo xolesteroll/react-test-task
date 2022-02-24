@@ -8,7 +8,7 @@ const FormPage = () => {
     return (
         <>
             {isFetching && <Loader/>}
-            <Form fetchingState={isFetching} changeFetchingState={setIsFetching}/>
+            <Form changeFetchingState={setIsFetching}/>
         </>
     );
 
